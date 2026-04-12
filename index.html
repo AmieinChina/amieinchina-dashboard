@@ -7,395 +7,116 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0e0e0e;
-    --surface: #1a1a1a;
-    --surface2: #222222;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.14);
-    --text: #f0ede8;
-    --text2: #9e9a94;
-    --text3: #5a5652;
-    --gold: #c9a84c;
-    --gold2: #e8c97a;
-    --gold-bg: rgba(201,168,76,0.1);
-    --green: #4caf82;
-    --green-bg: rgba(76,175,130,0.12);
-    --red: #e05c5c;
-    --red-bg: rgba(224,92,92,0.12);
-    --amber: #e09b4c;
-    --amber-bg: rgba(224,155,76,0.12);
-    --purple: #9b7fe8;
-    --purple-bg: rgba(155,127,232,0.12);
-    --blue: #5c9ee0;
-    --blue-bg: rgba(92,158,224,0.12);
-    --radius: 14px;
-    --radius-sm: 8px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  .header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .header-left { display: flex; align-items: center; gap: 14px; }
-
-  .logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    color: var(--gold2);
-    letter-spacing: 0.01em;
-  }
-
-  .week-badge {
-    background: var(--gold-bg);
-    border: 1px solid rgba(201,168,76,0.25);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 99px;
-    letter-spacing: 0.03em;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-
-  .sync-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    color: var(--text);
-    padding: 6px 14px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .sync-btn:hover { background: var(--border2); }
-  .sync-btn.syncing { opacity: 0.6; pointer-events: none; }
-
-  .sprint-bar {
-    background: linear-gradient(135deg, #1a1208 0%, #1a1408 100%);
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    padding: 10px 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-  }
-  .sprint-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  .sprint-text { color: var(--gold2); font-weight: 500; }
-  .sprint-sub { color: var(--text2); }
-  .sprint-days {
-    margin-left: auto;
-    background: var(--gold-bg);
-    border: 1px solid rgba(201,168,76,0.2);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 10px;
-    border-radius: 99px;
-  }
-
-  .main { padding: 24px 32px; display: grid; grid-template-columns: minmax(0,2.2fr) minmax(0,1fr); gap: 16px; max-width: 1400px; margin: 0 auto; }
-
-  .col-left { display: flex; flex-direction: column; gap: 16px; }
-  .col-right { display: flex; flex-direction: column; gap: 16px; }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    animation: fadeIn 0.3s ease;
-  }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
-  .card-title {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text2);
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .card-title-icon { font-size: 13px; }
-
-  .progress-wrap { margin-top: 14px; }
-  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
-  .progress-label { color: var(--text2); }
-  .progress-pct { color: var(--gold); font-weight: 600; }
-  .progress-track { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 2px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
-
-  /* Content videos */
-  .video-list { display: flex; flex-direction: column; gap: 2px; }
-
-  .video-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background 0.12s;
-    border: 1px solid transparent;
-  }
-  .video-item:hover { background: var(--surface2); }
-  .video-item.posted { opacity: 0.5; }
-
-  .v-check {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border2);
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-    position: relative;
-  }
-  .v-check.done {
-    background: var(--green);
-    border-color: var(--green);
-  }
-  .v-check.done::after {
-    content: '';
-    width: 10px; height: 6px;
-    border-left: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: rotate(-45deg) translateY(-1px);
-    display: block;
-  }
-
-  .v-title { flex: 1; font-size: 14px; color: var(--text); font-weight: 400; }
-  .v-title.done { text-decoration: line-through; color: var(--text3); }
-
-  .pill {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 3px 9px;
-    border-radius: 99px;
-    flex-shrink: 0;
-  }
-  .pill-idea { background: var(--surface2); color: var(--text2); border: 1px solid var(--border2); }
-  .pill-drafted { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(92,158,224,0.2); }
-  .pill-filmed { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(224,155,76,0.2); }
-  .pill-edited { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(155,127,232,0.2); }
-  .pill-posted { background: var(--green-bg); color: var(--green); border: 1px solid rgba(76,175,130,0.2); }
-
-  .empty-state {
-    text-align: center;
-    padding: 32px 16px;
-    color: var(--text3);
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .empty-state strong { color: var(--text2); display: block; margin-bottom: 4px; }
-
-  /* Score card */
-  .score-big {
-    text-align: center;
-    padding: 8px 0 4px;
-  }
-  .score-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 56px;
-    color: var(--text);
-    line-height: 1;
-  }
-  .score-denom { font-size: 22px; color: var(--text3); }
-  .score-result {
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 5px 16px;
-    border-radius: 99px;
-    display: inline-block;
-  }
-  .result-win { background: var(--green-bg); color: var(--green); border: 1px solid rgba(76,175,130,0.25); }
-  .result-warning { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(224,155,76,0.25); }
-  .result-fail { background: var(--red-bg); color: var(--red); border: 1px solid rgba(224,92,92,0.25); }
-  .result-progress { background: var(--surface2); color: var(--text2); border: 1px solid var(--border2); }
-
-  .score-breakdown {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 14px;
-  }
-  .score-part {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 10px 12px;
-    text-align: center;
-  }
-  .score-part-num { font-size: 20px; font-weight: 600; color: var(--text); }
-  .score-part-label { font-size: 10px; color: var(--text3); margin-top: 1px; letter-spacing: 0.04em; text-transform: uppercase; }
-
-  /* Fitness */
-  .fit-list { display: flex; flex-direction: column; gap: 2px; }
-  .fit-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 10px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background 0.12s;
-  }
-  .fit-item:hover { background: var(--surface2); }
-  .fit-check {
-    width: 18px; height: 18px;
-    border: 1.5px solid var(--border2);
-    border-radius: 4px;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
-  .fit-check.done { background: var(--purple); border-color: var(--purple); }
-  .fit-check.done::after {
-    content: '';
-    width: 8px; height: 5px;
-    border-left: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: rotate(-45deg) translateY(-1px);
-    display: block;
-  }
-  .fit-label { font-size: 13px; color: var(--text); }
-  .fit-label.done { color: var(--text3); text-decoration: line-through; }
-
-  /* Revenue */
-  .rev-amount {
-    font-family: 'DM Serif Display', serif;
-    font-size: 38px;
-    color: var(--text);
-    line-height: 1.1;
-    margin: 6px 0 4px;
-  }
-  .rev-target { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
-
-  /* Admin */
-  .admin-list { display: flex; flex-direction: column; gap: 2px; }
-  .admin-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 8px 10px;
-    border-radius: var(--radius-sm);
-  }
-  .admin-check {
-    width: 16px; height: 16px;
-    border: 1.5px solid var(--border2);
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-  .admin-label { font-size: 13px; color: var(--text2); }
-  .admin-empty { font-size: 12px; color: var(--text3); padding: 8px 10px; font-style: italic; }
-
-  /* Brand deals */
-  .deal-list { display: flex; flex-direction: column; gap: 2px; }
-  .deal-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 10px;
-    border-radius: var(--radius-sm);
-    transition: background 0.12s;
-  }
-  .deal-item:hover { background: var(--surface2); }
-  .deal-name { font-size: 13px; color: var(--text); font-weight: 500; }
-  .deal-value { font-size: 11px; color: var(--text3); margin-top: 1px; }
-
-  /* Loading skeleton */
-  .skeleton {
-    background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.4s infinite;
-    border-radius: 4px;
-    height: 14px;
-    margin: 8px 0;
-  }
-  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-  .error-msg {
-    background: var(--red-bg);
-    border: 1px solid rgba(224,92,92,0.2);
-    color: var(--red);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-size: 12px;
-    margin-top: 8px;
-  }
-
-  /* Sunday reset notes at bottom */
-  .notes-section {
-    grid-column: 1 / -1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-  }
-  .notes-header { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text2); margin-bottom: 10px; }
-  .notes-body { font-size: 13px; color: var(--text3); font-style: italic; }
-
-  .footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 11px;
-    color: var(--text3);
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
-  }
-
-  @media (max-width: 900px) {
-    .main { grid-template-columns: 1fr; padding: 16px; }
-    .header { padding: 14px 16px; }
-    .sprint-bar { padding: 10px 16px; }
-  }
+:root {
+  --bg:#0e0e0e;--surface:#1a1a1a;--surface2:#222;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#f0ede8;--text2:#9e9a94;--text3:#5a5652;
+  --gold:#c9a84c;--gold2:#e8c97a;--gold-bg:rgba(201,168,76,0.1);
+  --green:#4caf82;--green-bg:rgba(76,175,130,0.12);
+  --red:#e05c5c;--red-bg:rgba(224,92,92,0.12);
+  --amber:#e09b4c;--amber-bg:rgba(224,155,76,0.12);
+  --purple:#9b7fe8;--purple-bg:rgba(155,127,232,0.12);
+  --blue:#5c9ee0;--blue-bg:rgba(92,158,224,0.12);
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:15px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold2)}
+.week-badge{background:var(--gold-bg);border:1px solid rgba(201,168,76,0.25);color:var(--gold);font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;margin-left:12px}
+.sync-btn{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 15px;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s}
+.sync-btn:hover{background:var(--border2)}.sync-btn.syncing{opacity:.5;pointer-events:none}
+.last-sync{font-size:11px;color:var(--text3);margin-right:8px}
+.sprint-bar{background:#130f04;border-bottom:1px solid rgba(201,168,76,0.15);padding:0 26px}
+.sprint-top{display:flex;align-items:center;gap:10px;padding:10px 0 8px}
+.sprint-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sprint-label{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.sprint-desc{font-size:12px;color:var(--text2)}
+.sprint-days{margin-left:auto;background:var(--gold-bg);border:1px solid rgba(201,168,76,0.2);color:var(--gold);font-size:11px;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.sprint-log-wrap{border-top:1px solid rgba(255,255,255,0.05);padding:10px 0 14px}
+.sprint-log-label{font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.sprint-log{font-size:13px;color:var(--text2);min-height:38px;outline:none;width:100%;background:transparent;border:none;resize:none;font-family:'DM Sans',sans-serif;line-height:1.7}
+.sprint-log:focus{color:var(--text)}
+.main{padding:18px 26px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:13px;max-width:1260px;margin:0 auto}
+.col-left{display:flex;flex-direction:column;gap:13px}.col-right{display:flex;flex-direction:column;gap:13px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 19px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.card-title{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text2);display:flex;align-items:center;gap:7px}
+.card-meta{font-size:11px;color:var(--text3)}
+.progress-wrap{margin-top:11px}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.progress-label{color:var(--text2)}.progress-pct{color:var(--gold);font-weight:600}
+.progress-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .5s ease}
+.progress-fill-green{background:linear-gradient(90deg,var(--green),#6dd8a8)}
+.video-list{display:flex;flex-direction:column;gap:2px}
+.video-item{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:background .12s}
+.video-item:hover{background:var(--surface2)}.video-item.posted{opacity:.45}
+.v-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.v-check.done{background:var(--green);border-color:var(--green)}
+.v-check.done::after{content:'';width:10px;height:6px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
+.v-title{flex:1;font-size:13px;color:var(--text)}.v-title.done{text-decoration:line-through;color:var(--text3)}
+.pill{font-size:10px;font-weight:600;letter-spacing:.03em;padding:2px 8px;border-radius:99px;flex-shrink:0}
+.pill-idea{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.pill-drafted{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(92,158,224,.2)}
+.pill-filmed{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(224,155,76,.2)}
+.pill-edited{background:var(--purple-bg);color:var(--purple);border:1px solid rgba(155,127,232,.2)}
+.pill-posted,.pill-confirmed{background:var(--green-bg);color:var(--green);border:1px solid rgba(76,175,130,.2)}
+.pill-negotiating{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(224,155,76,.2)}
+.pill-contacted{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(92,158,224,.2)}
+.pill-lost{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
+.empty-state{text-align:center;padding:26px 14px;color:var(--text3);font-size:13px;line-height:1.9}
+.empty-state strong{color:var(--text2);display:block;margin-bottom:4px;font-size:14px}
+.error-msg{background:var(--red-bg);border:1px solid rgba(224,92,92,.25);color:var(--red);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;line-height:1.6}
+.score-big{text-align:center;padding:5px 0}
+.score-number{font-family:'DM Serif Display',serif;font-size:50px;color:var(--text);line-height:1}
+.score-denom{font-size:19px;color:var(--text3)}
+.score-result{margin-top:8px;font-size:12px;font-weight:600;padding:4px 14px;border-radius:99px;display:inline-block}
+.result-win{background:var(--green-bg);color:var(--green);border:1px solid rgba(76,175,130,.25)}
+.result-warning{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(224,155,76,.25)}
+.result-fail{background:var(--red-bg);color:var(--red);border:1px solid rgba(224,92,92,.25)}
+.result-progress{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.score-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.score-part{background:var(--surface2);border-radius:var(--radius-sm);padding:10px;text-align:center}
+.score-part-num{font-size:18px;font-weight:600;color:var(--text)}
+.score-part-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:1px}
+.fit-list{display:flex;flex-direction:column;gap:2px}
+.fit-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:background .12s;user-select:none}
+.fit-item:hover{background:var(--surface2)}
+.fit-check{width:18px;height:18px;border:1.5px solid var(--border2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.fit-check.done{background:var(--purple);border-color:var(--purple)}
+.fit-check.done::after{content:'';width:8px;height:5px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
+.fit-label{font-size:13px;color:var(--text)}.fit-label.done{text-decoration:line-through;color:var(--text3)}
+.admin-list{display:flex;flex-direction:column;gap:3px}
+.admin-item{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:var(--radius-sm);transition:background .12s}
+.admin-item:hover{background:var(--surface2)}
+.admin-cb{width:16px;height:16px;border:1.5px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.admin-cb.done{background:var(--green);border-color:var(--green)}
+.admin-cb.done::after{content:'';width:7px;height:4px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
+.admin-text{font-size:13px;color:var(--text2);outline:none;flex:1;min-height:20px;cursor:text}
+.admin-text.done{text-decoration:line-through;color:var(--text3)}
+.admin-hint{font-size:11px;color:var(--text3);padding:5px 10px;font-style:italic}
+.rev-amount{font-family:'DM Serif Display',serif;font-size:34px;color:var(--text);line-height:1.1;margin:4px 0 2px}
+.rev-target{font-size:12px;color:var(--text3);margin-bottom:10px}
+.deal-list{display:flex;flex-direction:column;gap:2px}
+.deal-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:var(--radius-sm);transition:background .12s}
+.deal-item:hover{background:var(--surface2)}
+.deal-name{font-size:13px;color:var(--text);font-weight:500}
+.deal-value{font-size:11px;color:var(--text3);margin-top:1px}
+.skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px;height:13px;margin:8px 0}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.footer{text-align:center;padding:18px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:4px}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-left">
+  <div style="display:flex;align-items:center">
     <div class="logo">AmieinChina</div>
-    <div class="week-badge" id="week-label">Loading...</div>
+    <div class="week-badge" id="week-label">—</div>
   </div>
-  <div class="header-right">
-    <span id="last-sync">—</span>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="last-sync" id="last-sync"></span>
     <button class="sync-btn" onclick="loadAll()" id="sync-btn">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 6A4.5 4.5 0 1 1 6 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 0L8.5 2.5 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Sync Notion
@@ -404,109 +125,87 @@
 </div>
 
 <div class="sprint-bar">
-  <div class="sprint-dot"></div>
-  <span class="sprint-text">Website Sprint</span>
-  <span class="sprint-sub">— Live by 30 April 2026. Every day without a live site is a day you can't take inbounds.</span>
-  <div class="sprint-days" id="sprint-days">— days left</div>
+  <div class="sprint-top">
+    <div class="sprint-dot"></div>
+    <span class="sprint-label">Website Sprint</span>
+    <span class="sprint-desc">— Live by 30 April 2026. Every day without a live site is a day you can't take inbounds.</span>
+    <div class="sprint-days" id="sprint-days">— days left</div>
+  </div>
+  <div class="sprint-log-wrap">
+    <div class="sprint-log-label">📝 Daily log — what did I work on today?</div>
+    <textarea class="sprint-log" id="sprint-log" rows="2" placeholder="e.g. Today I wrote the services page copy and chose my pricing packages..."></textarea>
+  </div>
 </div>
 
 <div class="main">
-
-  <!-- LEFT COL -->
   <div class="col-left">
 
-    <!-- Content this week -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">🎬</span> This week's content</div>
-        <div id="content-count" style="font-size:11px;color:var(--text3)">—</div>
+        <div class="card-title">🎬 This week's content</div>
+        <div class="card-meta" id="content-count"></div>
       </div>
       <div id="video-list" class="video-list">
-        <div class="skeleton" style="width:80%"></div>
-        <div class="skeleton" style="width:65%"></div>
-        <div class="skeleton" style="width:72%"></div>
+        <div class="skeleton" style="width:75%"></div>
+        <div class="skeleton" style="width:58%"></div>
+        <div class="skeleton" style="width:67%"></div>
       </div>
       <div class="progress-wrap">
         <div class="progress-meta">
           <span class="progress-label" id="content-progress-label">0 of 4 posted</span>
           <span class="progress-pct" id="content-pct">0%</span>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="content-bar" style="width:0%"></div>
-        </div>
+        <div class="progress-track"><div class="progress-fill" id="content-bar" style="width:0%"></div></div>
       </div>
     </div>
 
-    <!-- Admin this week -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">✅</span> Admin this week</div>
-        <div style="font-size:10px;color:var(--text3)">From Things 3 — update each Sunday</div>
+        <div class="card-title">✅ Admin this week</div>
+        <div class="card-meta">Type tasks from Things 3 each Sunday</div>
       </div>
-      <div class="admin-list" id="admin-list">
-        <div class="admin-item"><div class="admin-check"></div><div class="admin-label" contenteditable="true" style="outline:none;flex:1">Click to add admin task 1...</div></div>
-        <div class="admin-item"><div class="admin-check"></div><div class="admin-label" contenteditable="true" style="outline:none;flex:1">Click to add admin task 2...</div></div>
-        <div class="admin-item"><div class="admin-check"></div><div class="admin-label" contenteditable="true" style="outline:none;flex:1">Click to add admin task 3...</div></div>
-      </div>
+      <div class="admin-list" id="admin-list"></div>
     </div>
 
-    <!-- Brand deals -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">💼</span> Brand deals pipeline</div>
-        <div id="deals-summary" style="font-size:11px;color:var(--text3)">—</div>
+        <div class="card-title">💼 Brand deals pipeline</div>
+        <div class="card-meta" id="deals-meta"></div>
       </div>
       <div id="deals-list" class="deal-list">
-        <div class="skeleton" style="width:55%"></div>
-        <div class="skeleton" style="width:40%"></div>
+        <div class="skeleton" style="width:48%"></div>
+        <div class="skeleton" style="width:36%"></div>
       </div>
     </div>
 
   </div>
-
-  <!-- RIGHT COL -->
   <div class="col-right">
 
-    <!-- Weekly score -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">📊</span> Weekly score</div>
-        <div style="font-size:10px;color:var(--text3)">Resets Sunday</div>
+        <div class="card-title">📊 Weekly score</div>
+        <div class="card-meta">Fill in Sunday evening</div>
       </div>
       <div class="score-big">
         <div><span class="score-number" id="score-num">0</span><span class="score-denom">/8</span></div>
         <div><span class="score-result result-progress" id="score-badge">Week in progress</span></div>
       </div>
       <div class="score-breakdown">
-        <div class="score-part">
-          <div class="score-part-num" id="score-content">0/4</div>
-          <div class="score-part-label">Content</div>
-        </div>
-        <div class="score-part">
-          <div class="score-part-num" id="score-fitness">0/4</div>
-          <div class="score-part-label">Fitness</div>
-        </div>
+        <div class="score-part"><div class="score-part-num" id="score-content">0/4</div><div class="score-part-label">Content</div></div>
+        <div class="score-part"><div class="score-part-num" id="score-fitness">0/4</div><div class="score-part-label">Fitness</div></div>
       </div>
     </div>
 
-    <!-- Fitness -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">💪</span> Fitness this week</div>
-      </div>
+      <div class="card-header"><div class="card-title">💪 Fitness this week</div></div>
       <div class="fit-list" id="fit-list"></div>
     </div>
 
-    <!-- Revenue -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">💰</span> Revenue this month</div>
-      </div>
+      <div class="card-header"><div class="card-title">💰 Revenue this month</div></div>
       <div class="rev-amount" id="rev-amount">£0</div>
-      <div class="rev-target">Target: £1,000 / month</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="rev-bar" style="width:0%; background: linear-gradient(90deg, var(--green), #6dd8a8)"></div>
-      </div>
+      <div class="rev-target">Target: £1,000 minimum</div>
+      <div class="progress-track"><div class="progress-fill progress-fill-green" id="rev-bar" style="width:0%"></div></div>
       <div class="progress-meta" style="margin-top:6px">
         <span class="progress-label" id="rev-label">£0 of £1,000</span>
         <span class="progress-pct" id="rev-pct" style="color:var(--green)">0%</span>
@@ -514,236 +213,200 @@
     </div>
 
   </div>
-
-  <!-- FULL WIDTH NOTES -->
-  <div class="notes-section">
-    <div class="notes-header">📅 Sunday reset notes</div>
-    <div class="notes-body" contenteditable="true" style="outline:none;color:var(--text2);min-height:48px" id="reset-notes">Brain dump before you plan. What's on your mind? What are you avoiding? What's the #1 priority this week?</div>
-  </div>
-
 </div>
 
-<div class="footer">AmieinChina Weekly Dashboard · Syncs with Notion · Built for Amie</div>
+<div class="footer">AmieinChina Weekly Dashboard · <span id="footer-sync">Syncing...</span></div>
 
 <script>
-const PROXY = 'https://amie-notion-proxy.amiebrillu.workers.dev';
-const CONTENT_DB = '215175f78d278013a4b5d8489bf6722';
-const DEALS_DB = 'ffcc366868554ef688a94e17ef2f4c53';
+const PROXY='https://amie-notion-proxy.amiebrillu.workers.dev';
+const CONTENT_DB='215175f7-8d27-8013-a4b5-d58489bf6722';
+const DEALS_DB='ffcc366868554ef688a94e17ef2f4c53';
+const fitSessions=['Gym session 1','Gym session 2','Gym session 3','Run'];
+let fitState=JSON.parse(localStorage.getItem('fitState')||'[false,false,false,false]');
+let adminState=JSON.parse(localStorage.getItem('adminState')||'[{"text":"","done":false},{"text":"","done":false},{"text":"","done":false}]');
+let videos=[],deals=[],revenue=0;
 
-const fitSessions = ['Gym session 1','Gym session 2','Gym session 3','Run'];
-let fitState = JSON.parse(localStorage.getItem('fitState') || '[false,false,false,false]');
-let videos = [];
-let deals = [];
-let revenue = 0;
-
-function getWeekLabel() {
-  const now = new Date();
-  const day = now.getDay();
-  const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-  const mon = new Date(now.setDate(diff));
-  return 'w/c ' + mon.toLocaleDateString('en-GB', {day:'numeric',month:'short'});
+function getWeekLabel(){
+  const n=new Date(),d=n.getDay(),diff=n.getDate()-d+(d===0?-6:1);
+  const m=new Date(new Date().setDate(diff));
+  return 'w/c '+m.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
 }
-
-function getDaysLeft() {
-  const target = new Date('2026-04-30');
-  const now = new Date();
-  const diff = Math.ceil((target - now) / (1000*60*60*24));
-  return Math.max(0, diff);
+function getDaysLeft(){
+  return Math.max(0,Math.ceil((new Date('2026-04-30T23:59:59')-new Date())/86400000));
 }
-
-function statusPill(status) {
-  const s = (status || 'Idea').toLowerCase();
-  if(s === 'posted') return `<span class="pill pill-posted">Posted</span>`;
-  if(s === 'edited') return `<span class="pill pill-edited">Edited</span>`;
-  if(s === 'filmed') return `<span class="pill pill-filmed">Filmed</span>`;
-  if(s === 'drafted') return `<span class="pill pill-drafted">Drafted</span>`;
-  return `<span class="pill pill-idea">Idea</span>`;
+function sPill(s){
+  const st=(s||'Idea').toLowerCase();
+  if(st==='posted') return '<span class="pill pill-posted">Posted</span>';
+  if(st==='edited') return '<span class="pill pill-edited">Edited</span>';
+  if(st==='filmed') return '<span class="pill pill-filmed">Filmed</span>';
+  if(st==='drafted') return '<span class="pill pill-drafted">Drafted</span>';
+  return '<span class="pill pill-idea">Idea</span>';
 }
-
-function dealStagePill(stage) {
+function dPill(stage){
   if(!stage) return '';
-  if(stage.includes('Paid')) return `<span class="pill pill-posted">Paid</span>`;
-  if(stage.includes('Confirmed')) return `<span class="pill pill-filmed">Confirmed</span>`;
-  if(stage.includes('Negotiation')) return `<span class="pill pill-drafted">Negotiating</span>`;
-  if(stage.includes('Lost') || stage.includes('Declined')) return `<span class="pill pill-idea">Lost</span>`;
-  return `<span class="pill pill-idea">${stage.replace(/[^\w\s]/g,'').trim()}</span>`;
+  if(stage.includes('Paid')) return '<span class="pill pill-posted">Paid</span>';
+  if(stage.includes('Confirmed')) return '<span class="pill pill-confirmed">Confirmed</span>';
+  if(stage.includes('Negotiation')) return '<span class="pill pill-negotiating">Negotiating</span>';
+  if(stage.includes('Contacted')) return '<span class="pill pill-contacted">Contacted</span>';
+  if(stage.includes('Lost')||stage.includes('Declined')) return '<span class="pill pill-lost">Lost</span>';
+  return '<span class="pill pill-idea">'+stage.replace(/[^\w\s]/g,'').trim()+'</span>';
 }
 
-function renderVideos() {
-  const el = document.getElementById('video-list');
-  if(!videos.length) {
-    el.innerHTML = `<div class="empty-state"><strong>No videos flagged for this week yet</strong>Go to your Notion content database → tick "This week " on 3–4 videos → click Sync Notion</div>`;
-    updateContentProgress(0);
-    return;
+function renderVideos(){
+  const el=document.getElementById('video-list');
+  if(!videos.length){
+    el.innerHTML='<div class="empty-state"><strong>No videos flagged yet</strong>In Notion → open Content database → tick "This week " on 3–4 videos → click Sync Notion</div>';
+    updateCP(0,4); updateScore(); return;
   }
-  el.innerHTML = videos.map((v,i) => {
-    const isPosted = v.scored;
-    return `<div class="video-item ${isPosted?'posted':''}" onclick="toggleVideo(${i})">
-      <div class="v-check ${isPosted?'done':''}"></div>
-      <span class="v-title ${isPosted?'done':''}">${v.title}</span>
-      ${isPosted ? statusPill('Posted') : statusPill(v.status)}
-    </div>`;
-  }).join('');
-  document.getElementById('content-count').textContent = `${videos.length} video${videos.length!==1?'s':''} this week`;
-  const posted = videos.filter(v=>v.scored).length;
-  updateContentProgress(posted);
+  el.innerHTML=videos.map((v,i)=>`
+    <div class="video-item ${v.scored?'posted':''}" onclick="toggleVideo(${i})">
+      <div class="v-check ${v.scored?'done':''}"></div>
+      <span class="v-title ${v.scored?'done':''}">${v.title}</span>
+      ${v.scored?sPill('Posted'):sPill(v.status)}
+    </div>`).join('');
+  document.getElementById('content-count').textContent=videos.length+' video'+(videos.length!==1?'s':'')+' this week';
+  updateCP(videos.filter(v=>v.scored).length, Math.max(videos.length,4));
   updateScore();
 }
-
-function updateContentProgress(posted) {
-  const total = Math.max(videos.length, 4);
-  const pct = Math.round(posted/total*100);
-  document.getElementById('content-progress-label').textContent = `${posted} of ${total} posted`;
-  document.getElementById('content-pct').textContent = pct+'%';
-  document.getElementById('content-bar').style.width = pct+'%';
+function updateCP(posted,total){
+  const pct=total?Math.round(posted/total*100):0;
+  document.getElementById('content-progress-label').textContent=posted+' of '+total+' posted';
+  document.getElementById('content-pct').textContent=pct+'%';
+  document.getElementById('content-bar').style.width=pct+'%';
 }
-
-function renderFitness() {
-  const el = document.getElementById('fit-list');
-  el.innerHTML = fitSessions.map((s,i) => `
+function renderFitness(){
+  document.getElementById('fit-list').innerHTML=fitSessions.map((s,i)=>`
     <div class="fit-item" onclick="toggleFit(${i})">
       <div class="fit-check ${fitState[i]?'done':''}"></div>
       <span class="fit-label ${fitState[i]?'done':''}">${s}</span>
-    </div>
-  `).join('');
+    </div>`).join('');
   updateScore();
 }
-
-function renderDeals() {
-  const el = document.getElementById('deals-list');
-  const active = deals.filter(d => !d.stage.includes('Lost') && !d.stage.includes('Declined'));
-  if(!active.length) {
-    el.innerHTML = `<div class="admin-empty">No active deals — add prospects to your Notion Brand Deals database</div>`;
-    document.getElementById('deals-summary').textContent = '0 active';
+function renderAdmin(){
+  document.getElementById('admin-list').innerHTML=
+    adminState.map((a,i)=>`
+      <div class="admin-item">
+        <div class="admin-cb ${a.done?'done':''}" onclick="toggleAdmin(${i})"></div>
+        <div class="admin-text ${a.done?'done':''}" contenteditable="true"
+          onblur="saveAdminText(${i},this.innerText)"
+          onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
+          style="${!a.text?'color:var(--text3)':''}"
+        >${a.text||'Click to add task '+(i+1)+'...'}</div>
+      </div>`).join('')+
+    '<div class="admin-hint">Click a task to edit · Click the box to tick it off</div>';
+  document.querySelectorAll('.admin-text').forEach((el,i)=>{
+    el.addEventListener('focus',function(){
+      if(this.innerText.startsWith('Click to add'))this.innerText='';
+      this.style.color='var(--text2)';
+    });
+    el.addEventListener('blur',function(){
+      if(!this.innerText.trim()){this.innerText='Click to add task '+(i+1)+'...';this.style.color='var(--text3)';}
+    });
+  });
+}
+function renderDeals(){
+  const active=deals.filter(d=>!d.stage.includes('Lost')&&!d.stage.includes('Declined'));
+  document.getElementById('deals-meta').textContent=active.length+' active · £'+revenue.toLocaleString()+' earned';
+  const el=document.getElementById('deals-list');
+  if(!active.length){
+    el.innerHTML='<div class="empty-state"><strong>No active deals yet</strong>Add prospects to your Notion Brand Deals database</div>';
     return;
   }
-  document.getElementById('deals-summary').textContent = `${active.length} active · £${revenue.toLocaleString()} earned`;
-  el.innerHTML = active.map(d => `
+  el.innerHTML=active.map(d=>`
     <div class="deal-item">
       <div>
         <div class="deal-name">${d.name}</div>
-        ${d.value ? `<div class="deal-value">£${Number(d.value).toLocaleString()}</div>` : ''}
+        ${d.value?'<div class="deal-value">£'+Number(d.value).toLocaleString()+'</div>':''}
       </div>
-      ${dealStagePill(d.stage)}
-    </div>
-  `).join('');
+      ${dPill(d.stage)}
+    </div>`).join('');
+}
+function renderRevenue(){
+  const pct=Math.min(100,Math.round(revenue/1000*100));
+  document.getElementById('rev-amount').textContent='£'+revenue.toLocaleString();
+  document.getElementById('rev-bar').style.width=pct+'%';
+  document.getElementById('rev-label').textContent='£'+revenue.toLocaleString()+' of £1,000';
+  document.getElementById('rev-pct').textContent=pct+'%';
+}
+function updateScore(){
+  const c=videos.filter(v=>v.scored).length;
+  const f=fitState.filter(Boolean).length;
+  const total=c+f;
+  document.getElementById('score-num').textContent=total;
+  document.getElementById('score-content').textContent=c+'/4';
+  document.getElementById('score-fitness').textContent=f+'/4';
+  const b=document.getElementById('score-badge');
+  if(total>=6){b.textContent='Win';b.className='score-result result-win';}
+  else if(total>=4){b.textContent='Warning';b.className='score-result result-warning';}
+  else if(total>0){b.textContent='Keep going';b.className='score-result result-progress';}
+  else{b.textContent='Week in progress';b.className='score-result result-progress';}
 }
 
-function renderRevenue() {
-  const target = 1000;
-  const pct = Math.min(100, Math.round(revenue/target*100));
-  document.getElementById('rev-amount').textContent = '£'+revenue.toLocaleString();
-  document.getElementById('rev-bar').style.width = pct+'%';
-  document.getElementById('rev-label').textContent = `£${revenue.toLocaleString()} of £${target.toLocaleString()}`;
-  document.getElementById('rev-pct').textContent = pct+'%';
-}
+window.toggleVideo=i=>{videos[i].scored=!videos[i].scored;renderVideos();};
+window.toggleFit=i=>{fitState[i]=!fitState[i];localStorage.setItem('fitState',JSON.stringify(fitState));renderFitness();};
+window.toggleAdmin=i=>{adminState[i].done=!adminState[i].done;localStorage.setItem('adminState',JSON.stringify(adminState));renderAdmin();};
+window.saveAdminText=(i,t)=>{adminState[i].text=t.trim();localStorage.setItem('adminState',JSON.stringify(adminState));};
 
-function updateScore() {
-  const contentScore = videos.filter(v=>v.scored).length;
-  const fitScore = fitState.filter(Boolean).length;
-  const total = contentScore + fitScore;
-  document.getElementById('score-num').textContent = total;
-  document.getElementById('score-content').textContent = `${contentScore}/4`;
-  document.getElementById('score-fitness').textContent = `${fitScore}/4`;
-  const badge = document.getElementById('score-badge');
-  if(total >= 6) { badge.textContent = 'Win'; badge.className = 'score-result result-win'; }
-  else if(total >= 4) { badge.textContent = 'Warning'; badge.className = 'score-result result-warning'; }
-  else if(total > 0) { badge.textContent = 'Keep going'; badge.className = 'score-result result-progress'; }
-  else { badge.textContent = 'Week in progress'; badge.className = 'score-result result-progress'; }
-}
-
-window.toggleVideo = function(i) {
-  videos[i].scored = !videos[i].scored;
-  renderVideos();
-};
-
-window.toggleFit = function(i) {
-  fitState[i] = !fitState[i];
-  localStorage.setItem('fitState', JSON.stringify(fitState));
-  renderFitness();
-};
-
-async function fetchNotion(dbId, filter) {
-  const body = filter ? { filter } : {};
-  const res = await fetch(`${PROXY}/query/${dbId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if(!res.ok) throw new Error('Proxy error '+res.status);
+async function queryNotion(dbId,filter){
+  const body=filter?{filter}:{};
+  const res=await fetch(PROXY+'/query/'+dbId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!res.ok) throw new Error('Proxy '+res.status);
   return res.json();
 }
-
-async function loadContent() {
-  const data = await fetchNotion(CONTENT_DB, {
-    property: 'This week ',
-    checkbox: { equals: true }
-  });
-  videos = (data.results || []).map(p => {
-    const props = p.properties;
-    const title = props.Topic?.title?.[0]?.plain_text || 'Untitled';
-    const status = props.Status?.status?.name || 'Idea';
-    const scored = props['Week Score Point']?.checkbox || false;
-    return { title, status, scored, id: p.id };
-  });
+async function loadContent(){
+  const data=await queryNotion(CONTENT_DB,{property:'This week ',checkbox:{equals:true}});
+  videos=(data.results||[]).map(p=>({
+    id:p.id,
+    title:p.properties?.Topic?.title?.[0]?.plain_text||'Untitled',
+    status:p.properties?.Status?.status?.name||'Idea',
+    scored:p.properties?.['Week Score Point']?.checkbox||false
+  }));
 }
-
-async function loadDeals() {
-  const data = await fetchNotion(DEALS_DB);
-  const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  deals = (data.results || []).map(p => {
-    const props = p.properties;
-    return {
-      name: props['Brand / Company']?.title?.[0]?.plain_text || 'Unknown',
-      stage: props.Stage?.select?.name || '',
-      value: props['Deal Value']?.number || 0,
-      created: new Date(p.created_time)
-    };
-  });
-  revenue = deals
-    .filter(d => d.stage.includes('Paid') && d.created >= monthStart)
-    .reduce((sum, d) => sum + d.value, 0);
+async function loadDeals(){
+  const data=await queryNotion(DEALS_DB);
+  const ms=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+  deals=(data.results||[]).map(p=>({
+    name:p.properties?.['Brand / Company']?.title?.[0]?.plain_text||'Unknown',
+    stage:p.properties?.Stage?.select?.name||'',
+    value:p.properties?.['Deal Value']?.number||0,
+    created:new Date(p.created_time)
+  }));
+  revenue=deals.filter(d=>d.stage.includes('Paid')&&d.created>=ms).reduce((s,d)=>s+d.value,0);
 }
-
-async function loadAll() {
-  const btn = document.getElementById('sync-btn');
+async function loadAll(){
+  const btn=document.getElementById('sync-btn');
   btn.classList.add('syncing');
-  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="20" stroke-dashoffset="0"><animateTransform attributeName="transform" type="rotate" from="0 6 6" to="360 6 6" dur="0.8s" repeatCount="indefinite"/></circle></svg> Syncing...';
-  try {
-    await Promise.all([loadContent(), loadDeals()]);
-    renderVideos();
-    renderDeals();
-    renderRevenue();
-    updateScore();
-    document.getElementById('last-sync').textContent = 'Last sync: ' + new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
-  } catch(e) {
-    document.getElementById('video-list').innerHTML = `<div class="error-msg">Could not connect to Notion. Check your proxy is running. Error: ${e.message}</div>`;
+  btn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="20"><animateTransform attributeName="transform" type="rotate" from="0 6 6" to="360 6 6" dur=".7s" repeatCount="indefinite"/></circle></svg> Syncing...';
+  try{
+    await Promise.all([loadContent(),loadDeals()]);
+    renderVideos(); renderDeals(); renderRevenue();
+    const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('last-sync').textContent='Last sync: '+t;
+    document.getElementById('footer-sync').textContent='Last synced '+t;
+  }catch(e){
+    document.getElementById('video-list').innerHTML='<div class="error-msg"><strong>Could not connect to Notion</strong><br>'+e.message+'<br><br>Check your Notion integration has access to both databases, then try Sync Notion again.</div>';
+    document.getElementById('deals-list').innerHTML='<div class="error-msg">Connection error — try syncing again</div>';
   }
   btn.classList.remove('syncing');
-  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 6A4.5 4.5 0 1 1 6 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 0L8.5 2.5 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sync Notion';
+  btn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 6A4.5 4.5 0 1 1 6 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 0L8.5 2.5 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sync Notion';
 }
 
 // Init
-document.getElementById('week-label').textContent = getWeekLabel();
-document.getElementById('sprint-days').textContent = getDaysLeft() + ' days left';
-renderFitness();
-loadAll();
+document.getElementById('week-label').textContent=getWeekLabel();
+document.getElementById('sprint-days').textContent=getDaysLeft()+' days left';
+renderAdmin(); renderFitness(); loadAll();
 
-// Persist notes
-const notesEl = document.getElementById('reset-notes');
-const savedNotes = localStorage.getItem('resetNotes');
-if(savedNotes) notesEl.textContent = savedNotes;
-notesEl.addEventListener('input', () => localStorage.setItem('resetNotes', notesEl.textContent));
+// Sprint log persistence
+const logEl=document.getElementById('sprint-log');
+const saved=localStorage.getItem('sprintLog');
+if(saved) logEl.value=saved;
+logEl.addEventListener('input',()=>localStorage.setItem('sprintLog',logEl.value));
 
-// Reset fitness on Monday
-const lastReset = localStorage.getItem('lastFitReset');
-const today = new Date().toDateString();
-const isMonday = new Date().getDay() === 1;
-if(isMonday && lastReset !== today) {
-  fitState = [false,false,false,false];
-  localStorage.setItem('fitState', JSON.stringify(fitState));
-  localStorage.setItem('lastFitReset', today);
+// Auto-reset fitness on Monday
+if(new Date().getDay()===1&&localStorage.getItem('lastFitReset')!==new Date().toDateString()){
+  fitState=[false,false,false,false];
+  localStorage.setItem('fitState',JSON.stringify(fitState));
+  localStorage.setItem('lastFitReset',new Date().toDateString());
 }
 </script>
 </body>
