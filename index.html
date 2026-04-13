@@ -8,49 +8,30 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf8f5;
-  --surface:#ffffff;
-  --surface2:#f4f1ed;
-  --surface3:#ede9e3;
-  --border:rgba(0,0,0,0.07);
-  --border2:rgba(0,0,0,0.13);
-  --text:#1a1714;
-  --text2:#6b6560;
-  --text3:#a8a29b;
-  --red:#c0392b;
-  --red2:#e74c3c;
-  --red-bg:#fdf0ef;
-  --red-border:rgba(192,57,43,0.18);
-  --red-light:#f9d6d3;
-  --green:#1e8a5e;
-  --green-bg:#edf7f3;
-  --green-border:rgba(30,138,94,0.18);
-  --amber:#b5620a;
-  --amber-bg:#fef6ec;
-  --amber-border:rgba(181,98,10,0.18);
-  --blue:#1a6bab;
-  --blue-bg:#eef5fb;
-  --blue-border:rgba(26,107,171,0.18);
-  --purple:#6b3fa0;
-  --purple-bg:#f4effa;
-  --purple-border:rgba(107,63,160,0.18);
-  --radius:16px;
-  --radius-sm:10px;
-  --shadow:0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  --bg:#faf8f5;--surface:#ffffff;--surface2:#f4f1ed;--surface3:#ede9e3;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
+  --text:#1a1714;--text2:#6b6560;--text3:#a8a29b;--text4:#c8c3bc;
+  --red:#c0392b;--red2:#e74c3c;--red-bg:#fdf0ef;--red-border:rgba(192,57,43,0.18);
+  --green:#1e8a5e;--green-bg:#edf7f3;--green-border:rgba(30,138,94,0.18);
+  --amber:#b5620a;--amber-bg:#fef6ec;--amber-border:rgba(181,98,10,0.18);
+  --blue:#1a6bab;--blue-bg:#eef5fb;--blue-border:rgba(26,107,171,0.18);
+  --purple:#6b3fa0;--purple-bg:#f4effa;--purple-border:rgba(107,63,160,0.18);
+  --radius:16px;--radius-sm:10px;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
 
-/* HEADER */
 .header{background:var(--red);padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:56px;box-shadow:0 2px 8px rgba(192,57,43,0.25)}
-.logo{font-family:'DM Serif Display',serif;font-size:21px;color:#fff;letter-spacing:0.01em}
+.logo{font-family:'DM Serif Display',serif;font-size:21px;color:#fff}
 .week-badge{background:rgba(255,255,255,0.2);color:#fff;font-size:11px;font-weight:500;padding:3px 11px;border-radius:99px;margin-left:12px;border:1px solid rgba(255,255,255,0.3)}
+.header-right{display:flex;align-items:center;gap:10px}
 .sync-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:7px 16px;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s}
 .sync-btn:hover{background:rgba(255,255,255,0.25)}.sync-btn.syncing{opacity:.6;pointer-events:none}
-.last-sync{font-size:11px;color:rgba(255,255,255,0.65);margin-right:8px}
+.end-week-btn{background:#fff;border:none;color:var(--red);padding:7px 16px;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .15s;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+.end-week-btn:hover{background:#f8f8f8;transform:translateY(-1px)}
+.last-sync{font-size:11px;color:rgba(255,255,255,0.6)}
 
-/* SPRINT BAR */
 .sprint-bar{background:var(--red2);padding:0 28px}
 .sprint-top{display:flex;align-items:center;gap:10px;padding:9px 0 7px}
 .sprint-dot{width:6px;height:6px;background:#fff;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite;opacity:.9}
@@ -61,22 +42,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sprint-log-wrap{border-top:1px solid rgba(255,255,255,0.15);padding:9px 0 13px}
 .sprint-log-label{font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
 .sprint-log{font-size:13px;color:rgba(255,255,255,0.8);min-height:36px;outline:none;width:100%;background:transparent;border:none;resize:none;font-family:'DM Sans',sans-serif;line-height:1.7}
-.sprint-log::placeholder{color:rgba(255,255,255,0.4)}
-.sprint-log:focus{color:#fff}
+.sprint-log::placeholder{color:rgba(255,255,255,0.4)}.sprint-log:focus{color:#fff}
 
-/* MAIN */
 .main{padding:22px 28px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;max-width:1280px;margin:0 auto}
 .col-left{display:flex;flex-direction:column;gap:14px}
 .col-right{display:flex;flex-direction:column;gap:14px}
 
-/* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .card-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;gap:7px}
-.card-title-icon{font-size:14px}
 .card-meta{font-size:11px;color:var(--text3)}
 
-/* PROGRESS */
 .progress-wrap{margin-top:14px}
 .progress-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
 .progress-label{color:var(--text2)}.progress-pct{color:var(--red);font-weight:600}
@@ -84,18 +60,14 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:3px;transition:width .5s ease}
 .progress-fill-green{background:linear-gradient(90deg,var(--green),#2ecc71)}
 
-/* VIDEOS */
 .video-list{display:flex;flex-direction:column;gap:3px}
-.video-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background .12s;border:1px solid transparent}
-.video-item:hover{background:var(--surface2)}
-.video-item.posted{opacity:.5}
+.video-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background .12s}
+.video-item:hover{background:var(--surface2)}.video-item.posted{opacity:.5}
 .v-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .v-check.done{background:var(--green);border-color:var(--green)}
 .v-check.done::after{content:'';width:10px;height:6px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
-.v-title{flex:1;font-size:13px;color:var(--text);font-weight:400}
-.v-title.done{text-decoration:line-through;color:var(--text3)}
+.v-title{flex:1;font-size:13px;color:var(--text)}.v-title.done{text-decoration:line-through;color:var(--text3)}
 
-/* PILLS */
 .pill{font-size:10px;font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:99px;flex-shrink:0}
 .pill-idea{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
 .pill-drafted{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
@@ -106,16 +78,15 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .pill-contacted{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
 .pill-lost{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
 
-/* EMPTY / ERROR */
 .empty-state{text-align:center;padding:28px 16px;color:var(--text3);font-size:13px;line-height:1.9}
 .empty-state strong{color:var(--text2);display:block;margin-bottom:4px;font-size:14px}
 .error-msg{background:#fdf0ef;border:1px solid var(--red-border);color:var(--red);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;line-height:1.6}
 
-/* SCORE */
 .score-big{text-align:center;padding:6px 0 4px}
 .score-number{font-family:'DM Serif Display',serif;font-size:56px;color:var(--text);line-height:1}
 .score-denom{font-size:22px;color:var(--text3)}
-.score-result{margin-top:10px;font-size:12px;font-weight:600;padding:5px 16px;border-radius:99px;display:inline-block;letter-spacing:.02em}
+.score-result{margin-top:10px;font-size:12px;font-weight:600;padding:5px 16px;border-radius:99px;display:inline-block}
+.result-smash{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
 .result-win{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
 .result-almost{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
 .result-going{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
@@ -125,17 +96,21 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .score-part-num{font-size:20px;font-weight:600;color:var(--text)}
 .score-part-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
 
-/* FITNESS */
 .fit-list{display:flex;flex-direction:column;gap:3px}
 .fit-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background .12s;user-select:none}
 .fit-item:hover{background:var(--surface2)}
+.fit-item.bonus{opacity:.65}
+.fit-item.bonus:hover{opacity:1}
 .fit-check{width:18px;height:18px;border:2px solid var(--border2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .fit-check.done{background:var(--red);border-color:var(--red)}
 .fit-check.done::after{content:'';width:8px;height:5px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
-.fit-label{font-size:13px;color:var(--text)}
+.fit-check.bonus-check{border-style:dashed;border-color:var(--text4)}
+.fit-check.bonus-check.done{background:var(--green);border-color:var(--green);border-style:solid}
+.fit-label{font-size:13px;color:var(--text);outline:none;flex:1;cursor:text;min-width:0}
 .fit-label.done{text-decoration:line-through;color:var(--text3)}
+.fit-label.bonus-label{color:var(--text3);font-style:italic;font-size:12px}
+.fit-divider{height:1px;background:var(--border);margin:4px 0}
 
-/* ADMIN */
 .admin-list{display:flex;flex-direction:column;gap:4px}
 .admin-item{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:var(--radius-sm);transition:background .12s}
 .admin-item:hover{background:var(--surface2)}
@@ -146,7 +121,15 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .admin-text.done{text-decoration:line-through;color:var(--text3)}
 .admin-hint{font-size:11px;color:var(--text3);padding:5px 12px;font-style:italic}
 
-/* REVENUE */
+.house-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow)}
+.house-item{display:flex;align-items:flex-start;gap:10px;padding:4px 0}
+.house-cb{width:16px;height:16px;border:2px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.house-cb.done{background:var(--green);border-color:var(--green)}
+.house-cb.done::after{content:'';width:7px;height:4px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) translateY(-1px);display:block}
+.house-text{font-size:13px;color:var(--text2);outline:none;flex:1;min-height:20px;cursor:text}
+.house-text.done{text-decoration:line-through;color:var(--text3)}
+.house-hint{font-size:11px;color:var(--text3);margin-top:8px;font-style:italic}
+
 .rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
 .rev-block{background:var(--surface2);border-radius:var(--radius-sm);padding:14px 16px;border:1px solid var(--border)}
 .rev-flag{font-size:18px;margin-bottom:4px}
@@ -157,7 +140,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .rev-fill-rmb{height:100%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:2px;transition:width .5s ease}
 .rev-note{font-size:10px;color:var(--text3);text-align:center;margin-top:10px;letter-spacing:.03em}
 
-/* DEALS — three column */
 .deal-list{display:flex;flex-direction:column;gap:3px}
 .deal-item{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);transition:background .12s}
 .deal-item:hover{background:var(--surface2)}
@@ -165,10 +147,32 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .deal-val{font-size:13px;color:var(--text);font-weight:600;white-space:nowrap}
 .deal-val.empty{color:var(--text3);font-weight:400}
 
-/* SKELETON */
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:20px;padding:36px 40px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);animation:slideUp .25s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.modal-icon{font-size:48px;text-align:center;margin-bottom:12px}
+.modal-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--text);text-align:center;margin-bottom:6px}
+.modal-subtitle{font-size:13px;color:var(--text2);text-align:center;margin-bottom:24px}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
+.modal-stat{background:var(--surface2);border-radius:var(--radius-sm);padding:14px;text-align:center;border:1px solid var(--border)}
+.modal-stat-num{font-size:24px;font-weight:600;color:var(--text)}
+.modal-stat-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.modal-result{text-align:center;font-size:14px;font-weight:600;padding:10px;border-radius:var(--radius-sm);margin-bottom:24px}
+.modal-result.smash{background:var(--purple-bg);color:var(--purple)}
+.modal-result.win{background:var(--green-bg);color:var(--green)}
+.modal-result.almost{background:var(--amber-bg);color:var(--amber)}
+.modal-result.going{background:var(--red-bg);color:var(--red)}
+.modal-btns{display:flex;gap:10px}
+.modal-btn-cancel{flex:1;padding:12px;border:1px solid var(--border2);background:#fff;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s}
+.modal-btn-cancel:hover{background:var(--surface2)}
+.modal-btn-confirm{flex:2;padding:12px;border:none;background:var(--red);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;transition:all .15s}
+.modal-btn-confirm:hover{background:var(--red2)}
+.modal-saving{text-align:center;font-size:12px;color:var(--text3);margin-top:12px}
+
 .skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--border2) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px;height:14px;margin:9px 0}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
 .footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:4px}
 </style>
 </head>
@@ -179,11 +183,14 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="logo">AmieinChina</div>
     <div class="week-badge" id="week-label">—</div>
   </div>
-  <div style="display:flex;align-items:center;gap:10px">
+  <div class="header-right">
     <span class="last-sync" id="last-sync"></span>
     <button class="sync-btn" onclick="loadAll()" id="sync-btn">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 6A4.5 4.5 0 1 1 6 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 0L8.5 2.5 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Sync Notion
+    </button>
+    <button class="end-week-btn" onclick="showEndWeekModal()">
+      ✓ End Week
     </button>
   </div>
 </div>
@@ -197,7 +204,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </div>
   <div class="sprint-log-wrap">
     <div class="sprint-log-label">📝 Daily log — what did I work on today?</div>
-    <textarea class="sprint-log" id="sprint-log" rows="2" placeholder="e.g. Today I wrote the services page copy and chose my pricing packages..."></textarea>
+    <textarea class="sprint-log" id="sprint-log" rows="2" placeholder="e.g. Today I finalised the services page and set up the contact form..."></textarea>
   </div>
 </div>
 
@@ -206,7 +213,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">🎬</span> This week's content</div>
+        <div class="card-title">🎬 This week's content</div>
         <div class="card-meta" id="content-count"></div>
       </div>
       <div id="video-list" class="video-list">
@@ -225,7 +232,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">✅</span> Admin this week</div>
+        <div class="card-title">✅ Admin this week</div>
         <div class="card-meta">Type tasks from Things 3 each Sunday</div>
       </div>
       <div class="admin-list" id="admin-list"></div>
@@ -233,7 +240,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">💼</span> Brand deals pipeline</div>
+        <div class="card-title">💼 Brand deals pipeline</div>
         <div class="card-meta" id="deals-meta"></div>
       </div>
       <div id="deals-list" class="deal-list">
@@ -242,12 +249,27 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       </div>
     </div>
 
+    <div class="house-card">
+      <div class="card-header">
+        <div class="card-title">🏠 Home project this week</div>
+        <div class="card-meta">Bedroom renovation</div>
+      </div>
+      <div class="house-item">
+        <div class="house-cb" id="house-cb" onclick="toggleHouse()"></div>
+        <div class="house-text" id="house-text" contenteditable="true"
+          onblur="saveHouse(this.innerText)"
+          onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
+        ></div>
+      </div>
+      <div class="house-hint">One task toward the bedroom renovation this week. Doesn't count toward your score — just keeps it moving.</div>
+    </div>
+
   </div>
   <div class="col-right">
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">📊</span> Weekly score</div>
+        <div class="card-title">📊 Weekly score</div>
         <div class="card-meta">Fill in Sunday evening</div>
       </div>
       <div class="score-big">
@@ -261,13 +283,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
 
     <div class="card">
-      <div class="card-header"><div class="card-title"><span class="card-title-icon">💪</span> Fitness this week</div></div>
+      <div class="card-header"><div class="card-title">💪 Fitness this week</div></div>
       <div class="fit-list" id="fit-list"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><span class="card-title-icon">💰</span> Revenue this month</div>
+        <div class="card-title">💰 Revenue this month</div>
         <div class="card-meta" id="rev-month-label"></div>
       </div>
       <div class="rev-grid">
@@ -296,20 +318,53 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 const PROXY='https://amie-notion-proxy.amiebrillu.workers.dev';
 const CONTENT_DB='215175f7-8d27-8013-a4b5-d58489bf6722';
 const DEALS_DB='ffcc366868554ef688a94e17ef2f4c53';
-const fitSessions=['Gym session 1','Gym session 2','Gym session 3','Run'];
-let fitState=JSON.parse(localStorage.getItem('fitState')||'[false,false,false,false]');
+const RESULTS_DB='1c24b757-044e-4236-ab7f-4b0cf9728ee1';
+
+const FIT_DEFAULTS=['Strength training 1','Strength training 2','Strength training 3','Run'];
+
+function getMondayDate(d){
+  const n=d||new Date();
+  const day=n.getDay();
+  const diff=n.getDate()-day+(day===0?-6:1);
+  return new Date(new Date(n).setDate(diff));
+}
+function getWeekLabel(){
+  const m=getMondayDate();
+  return 'w/c '+m.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+}
+function getMondayStr(){
+  const m=getMondayDate();
+  return m.toISOString().split('T')[0];
+}
+function getDaysLeft(){
+  return Math.max(0,Math.ceil((new Date('2026-04-30T23:59:59')-new Date())/86400000));
+}
+function getMonthLabel(){
+  return new Date().toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+}
+function getScoreLabel(total){
+  if(total>8) return {text:'🏆 Smashed it! Over and above!!',cls:'result-smash'};
+  if(total===8) return {text:'🏆 Win',cls:'result-win'};
+  if(total>=6) return {text:'Almost there!',cls:'result-almost'};
+  if(total>=1) return {text:'Keep going',cls:'result-going'};
+  return {text:'Week in progress',cls:'result-progress'};
+}
+function getModalResultCls(total){
+  if(total>8) return 'smash';
+  if(total===8) return 'win';
+  if(total>=6) return 'almost';
+  return 'going';
+}
+
+// State
+let fitState=JSON.parse(localStorage.getItem('fitState')||'[false,false,false,false,false]');
+let fitLabels=JSON.parse(localStorage.getItem('fitLabels')||JSON.stringify([...FIT_DEFAULTS,'For good measure']));
 let adminState=JSON.parse(localStorage.getItem('adminState')||'[{"text":"","done":false},{"text":"","done":false},{"text":"","done":false}]');
+let houseState=JSON.parse(localStorage.getItem('houseState')||'{"text":"","done":false}');
 let videos=[],deals=[],gbpRevenue=0,rmbRevenue=0;
 
-function getWeekLabel(){
-  const n=new Date(),d=n.getDay(),diff=n.getDate()-d+(d===0?-6:1);
-  return 'w/c '+new Date(new Date().setDate(diff)).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-}
-function getDaysLeft(){return Math.max(0,Math.ceil((new Date('2026-04-30T23:59:59')-new Date())/86400000));}
-function getMonthLabel(){return new Date().toLocaleDateString('en-GB',{month:'long',year:'numeric'});}
-
 function sPill(s){
-  const st=(s||'Idea').toLowerCase();
+  const st=(s||'').toLowerCase();
   if(st==='posted') return '<span class="pill pill-posted">Posted</span>';
   if(st==='edited') return '<span class="pill pill-edited">Edited</span>';
   if(st==='filmed') return '<span class="pill pill-filmed">Filmed</span>';
@@ -323,25 +378,21 @@ function dPill(stage){
   if(stage.includes('Negotiation')) return '<span class="pill pill-negotiating">Negotiating</span>';
   if(stage.includes('Contacted')) return '<span class="pill pill-contacted">Contacted</span>';
   if(stage.includes('Identified')) return '<span class="pill pill-idea">Identified</span>';
-  return '<span class="pill pill-idea">'+stage.replace(/[^\w\s]/g,'').trim()+'</span>';
+  return '';
 }
 function formatVal(d){
   if(d.gbp>0) return '£'+Number(d.gbp).toLocaleString('en-GB');
   if(d.rmb>0) return '¥'+Number(d.rmb).toLocaleString();
   return null;
 }
-
 function dealVisible(d){
-  const stage=d.stage||'';
-  // Never show lost or declined
-  if(stage.includes('Lost')||stage.includes('Declined')) return false;
-  // Paid: only show if payment date is this calendar month
-  if(stage.includes('Paid')){
+  const s=d.stage||'';
+  if(s.includes('Lost')||s.includes('Declined')) return false;
+  if(s.includes('Paid')){
     if(!d.paymentDate) return false;
     const now=new Date();
     return d.paymentDate.getFullYear()===now.getFullYear()&&d.paymentDate.getMonth()===now.getMonth();
   }
-  // Everything else (active deals): always show
   return true;
 }
 
@@ -365,16 +416,38 @@ function updateCP(posted,total){
   const pct=total?Math.round(posted/total*100):0;
   document.getElementById('content-progress-label').textContent=posted+' of '+total+' posted';
   document.getElementById('content-pct').textContent=pct+'%';
-  document.getElementById('content-bar').style.width=pct+'%';
+  document.getElementById('content-bar').style.width=Math.min(100,pct)+'%';
 }
+
 function renderFitness(){
-  document.getElementById('fit-list').innerHTML=fitSessions.map((s,i)=>`
-    <div class="fit-item" onclick="toggleFit(${i})">
+  const el=document.getElementById('fit-list');
+  let html='';
+  // 4 scored sessions
+  for(let i=0;i<4;i++){
+    html+=`<div class="fit-item" onclick="toggleFit(${i})">
       <div class="fit-check ${fitState[i]?'done':''}"></div>
-      <span class="fit-label ${fitState[i]?'done':''}">${s}</span>
-    </div>`).join('');
+      <span class="fit-label ${fitState[i]?'done':''}" contenteditable="true"
+        onclick="event.stopPropagation()"
+        onblur="saveFitLabel(${i},this.innerText)"
+        onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
+      >${fitLabels[i]||FIT_DEFAULTS[i]}</span>
+    </div>`;
+  }
+  // Divider
+  html+='<div class="fit-divider"></div>';
+  // Bonus session (index 4)
+  html+=`<div class="fit-item bonus" onclick="toggleFit(4)">
+    <div class="fit-check bonus-check ${fitState[4]?'done':''}"></div>
+    <span class="fit-label bonus-label ${fitState[4]?'done':''}" contenteditable="true"
+      onclick="event.stopPropagation()"
+      onblur="saveFitLabel(4,this.innerText)"
+      onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"
+    >${fitLabels[4]||'For good measure'}</span>
+  </div>`;
+  el.innerHTML=html;
   updateScore();
 }
+
 function renderAdmin(){
   document.getElementById('admin-list').innerHTML=
     adminState.map((a,i)=>`
@@ -392,16 +465,36 @@ function renderAdmin(){
     el.addEventListener('blur',function(){if(!this.innerText.trim()){this.innerText='Click to add task '+(i+1)+'...';this.style.color='var(--text3)';}});
   });
 }
+
+function renderHouse(){
+  const cb=document.getElementById('house-cb');
+  const txt=document.getElementById('house-text');
+  if(houseState.done){cb.classList.add('done');}else{cb.classList.remove('done');}
+  if(!txt.innerText.trim()||txt.innerText===placeholder){
+    txt.innerText=houseState.text||'';
+    txt.style.color=houseState.text?'var(--text2)':'var(--text3)';
+  }
+  const placeholder='What\'s the one thing for the bedroom this week?';
+  if(!houseState.text){
+    txt.setAttribute('data-placeholder',placeholder);
+    txt.style.color='var(--text3)';
+    if(!txt.innerText.trim()) txt.innerText=placeholder;
+  }
+  txt.addEventListener('focus',function(){
+    if(this.innerText===placeholder||this.innerText.startsWith('What\'s the one')){this.innerText='';this.style.color='var(--text2)';}
+  });
+  txt.addEventListener('blur',function(){
+    if(!this.innerText.trim()){this.innerText=placeholder;this.style.color='var(--text3)';}
+  });
+}
+
 function renderDeals(){
   const visible=deals.filter(dealVisible);
   const activeCount=deals.filter(d=>!d.stage.includes('Lost')&&!d.stage.includes('Declined')&&!d.stage.includes('Paid')).length;
   const paidCount=deals.filter(d=>d.stage.includes('Paid')).length;
   document.getElementById('deals-meta').textContent=activeCount+' active · '+paidCount+' paid total';
   const el=document.getElementById('deals-list');
-  if(!visible.length){
-    el.innerHTML='<div class="empty-state"><strong>No deals to show</strong>Active and this-month paid deals appear here</div>';
-    return;
-  }
+  if(!visible.length){el.innerHTML='<div class="empty-state"><strong>No deals to show</strong>Active and this-month paid deals appear here</div>';return;}
   el.innerHTML=visible.map(d=>{
     const val=formatVal(d);
     return `<div class="deal-item">
@@ -411,6 +504,7 @@ function renderDeals(){
     </div>`;
   }).join('');
 }
+
 function renderRevenue(){
   const gbpPct=Math.min(100,Math.round(gbpRevenue/1000*100));
   const rmbPct=rmbRevenue>0?Math.min(100,Math.round(rmbRevenue/Math.max(rmbRevenue,10000)*100)):0;
@@ -420,24 +514,115 @@ function renderRevenue(){
   document.getElementById('rev-rmb-bar').style.width=rmbPct+'%';
   document.getElementById('rev-month-label').textContent=getMonthLabel();
 }
+
 function updateScore(){
   const c=videos.filter(v=>v.scored).length;
-  const f=fitState.filter(Boolean).length;
+  const f=fitState.slice(0,4).filter(Boolean).length;
   const total=c+f;
   document.getElementById('score-num').textContent=total;
   document.getElementById('score-content').textContent=c+'/4';
   document.getElementById('score-fitness').textContent=f+'/4';
+  const {text,cls}=getScoreLabel(total);
   const b=document.getElementById('score-badge');
-  if(total===8){b.textContent='🏆 Win';b.className='score-result result-win';}
-  else if(total>=6){b.textContent='Almost there!';b.className='score-result result-almost';}
-  else if(total>=1){b.textContent='Keep going';b.className='score-result result-going';}
-  else{b.textContent='Week in progress';b.className='score-result result-progress';}
+  b.textContent=text;b.className='score-result '+cls;
 }
 
 window.toggleVideo=i=>{videos[i].scored=!videos[i].scored;renderVideos();};
 window.toggleFit=i=>{fitState[i]=!fitState[i];localStorage.setItem('fitState',JSON.stringify(fitState));renderFitness();};
+window.saveFitLabel=(i,t)=>{fitLabels[i]=t.trim()||FIT_DEFAULTS[i]||'For good measure';localStorage.setItem('fitLabels',JSON.stringify(fitLabels));};
 window.toggleAdmin=i=>{adminState[i].done=!adminState[i].done;localStorage.setItem('adminState',JSON.stringify(adminState));renderAdmin();};
 window.saveAdminText=(i,t)=>{adminState[i].text=t.trim();localStorage.setItem('adminState',JSON.stringify(adminState));};
+window.toggleHouse=()=>{houseState.done=!houseState.done;localStorage.setItem('houseState',JSON.stringify(houseState));renderHouse();};
+window.saveHouse=t=>{houseState.text=t.trim();localStorage.setItem('houseState',JSON.stringify(houseState));};
+
+// END WEEK MODAL
+function showEndWeekModal(){
+  const c=videos.filter(v=>v.scored).length;
+  const f=fitState.slice(0,4).filter(Boolean).length;
+  const total=c+f;
+  const {text}=getScoreLabel(total);
+  const resultCls=getModalResultCls(total);
+  const icons={smash:'🏆',win:'🏆',almost:'💪',going:'🔥'};
+  const icon=icons[resultCls]||'📋';
+
+  const modal=document.createElement('div');
+  modal.className='modal-overlay';
+  modal.id='end-week-modal';
+  modal.innerHTML=`
+    <div class="modal">
+      <div class="modal-icon">${icon}</div>
+      <div class="modal-title">Week Complete</div>
+      <div class="modal-subtitle">${getWeekLabel()} · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</div>
+      <div class="modal-stats">
+        <div class="modal-stat"><div class="modal-stat-num">${c}/4</div><div class="modal-stat-label">Content</div></div>
+        <div class="modal-stat"><div class="modal-stat-num">${f}/4</div><div class="modal-stat-label">Fitness</div></div>
+        <div class="modal-stat"><div class="modal-stat-num">${total}</div><div class="modal-stat-label">Total</div></div>
+      </div>
+      <div class="modal-result ${resultCls}">${text}</div>
+      <div class="modal-btns">
+        <button class="modal-btn-cancel" onclick="closeModal()">Not yet</button>
+        <button class="modal-btn-confirm" onclick="confirmEndWeek(${c},${f},${total},'${text.replace(/'/g,'\\\'').replace(/!!/g,'!!')}')">Save & start fresh week</button>
+      </div>
+      <div class="modal-saving" id="modal-saving"></div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+window.closeModal=()=>{
+  const m=document.getElementById('end-week-modal');
+  if(m) m.remove();
+};
+
+window.confirmEndWeek=async(c,f,total,result)=>{
+  const saving=document.getElementById('modal-saving');
+  if(saving) saving.textContent='Saving to Notion...';
+  const btn=document.querySelector('.modal-btn-confirm');
+  if(btn){btn.disabled=true;btn.textContent='Saving...';}
+
+  // Save to Notion
+  try{
+    const weekStr=getMondayStr();
+    const weekLabel='Week of '+getMondayDate().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const body={
+      parent:{database_id:RESULTS_DB},
+      properties:{
+        'Week Commencing':{title:[{text:{content:weekLabel}}]},
+        'Content Score':{number:c},
+        'Fitness Score':{number:f},
+        'Total Score':{number:total},
+        'Result':{select:{name:result}},
+        'Date':{date:{start:weekStr}}
+      }
+    };
+    const res=await fetch(PROXY+'/pages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!res.ok) throw new Error('Save failed '+res.status);
+  }catch(e){
+    if(saving) saving.textContent='Could not save to Notion: '+e.message+'. Resetting locally anyway.';
+    await new Promise(r=>setTimeout(r,2000));
+  }
+
+  // Reset all local state
+  fitState=[false,false,false,false,false];
+  fitLabels=[...FIT_DEFAULTS,'For good measure'];
+  adminState=[{text:'',done:false},{text:'',done:false},{text:'',done:false}];
+  houseState={text:'',done:false};
+  localStorage.setItem('fitState',JSON.stringify(fitState));
+  localStorage.setItem('fitLabels',JSON.stringify(fitLabels));
+  localStorage.setItem('adminState',JSON.stringify(adminState));
+  localStorage.setItem('houseState',JSON.stringify(houseState));
+  localStorage.setItem('sprintLog','');
+  videos.forEach(v=>v.scored=false);
+
+  closeModal();
+  renderVideos();
+  renderFitness();
+  renderAdmin();
+  renderHouse();
+  document.getElementById('sprint-log').value='';
+  document.getElementById('week-label').textContent=getWeekLabel();
+  document.getElementById('sprint-days').textContent=getDaysLeft()+' days left';
+  updateScore();
+};
 
 async function queryNotion(dbId,filter){
   const body=filter?{filter}:{};
@@ -491,20 +676,31 @@ async function loadAll(){
   btn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.5 6A4.5 4.5 0 1 1 6 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 0L8.5 2.5 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sync Notion';
 }
 
+// Init
 document.getElementById('week-label').textContent=getWeekLabel();
 document.getElementById('sprint-days').textContent=getDaysLeft()+' days left';
-renderAdmin();renderFitness();loadAll();
+renderAdmin();renderFitness();renderHouse();loadAll();
 
 const logEl=document.getElementById('sprint-log');
-const saved=localStorage.getItem('sprintLog');
-if(saved) logEl.value=saved;
+const savedLog=localStorage.getItem('sprintLog');
+if(savedLog) logEl.value=savedLog;
 logEl.addEventListener('input',()=>localStorage.setItem('sprintLog',logEl.value));
 
-if(new Date().getDay()===1&&localStorage.getItem('lastFitReset')!==new Date().toDateString()){
-  fitState=[false,false,false,false];
+// Auto reset fitness labels on new week
+const savedWeek=localStorage.getItem('lastWeek');
+const currentWeek=getMondayStr();
+if(savedWeek&&savedWeek!==currentWeek){
+  fitState=[false,false,false,false,false];
+  fitLabels=[...FIT_DEFAULTS,'For good measure'];
+  adminState=[{text:'',done:false},{text:'',done:false},{text:'',done:false}];
+  houseState={text:'',done:false};
   localStorage.setItem('fitState',JSON.stringify(fitState));
-  localStorage.setItem('lastFitReset',new Date().toDateString());
+  localStorage.setItem('fitLabels',JSON.stringify(fitLabels));
+  localStorage.setItem('adminState',JSON.stringify(adminState));
+  localStorage.setItem('houseState',JSON.stringify(houseState));
+  localStorage.setItem('sprintLog','');
 }
+localStorage.setItem('lastWeek',currentWeek);
 </script>
 </body>
 </html>
