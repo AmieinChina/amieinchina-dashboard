@@ -68,6 +68,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .v-title{flex:1;font-size:13px;color:var(--text)}.v-title.done{text-decoration:line-through;color:var(--text3)}
 .pill{font-size:10px;font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:99px;flex-shrink:0}
 .pill-idea{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.pill-archived{background:#f0f0f0;color:#888;border:1px solid #ddd}
 .pill-drafted{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
 .pill-filmed{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
 .pill-edited{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
@@ -365,6 +366,7 @@ function sPill(s){
   if(st==='edited') return '<span class="pill pill-edited">Edited</span>';
   if(st==='filmed') return '<span class="pill pill-filmed">Filmed</span>';
   if(st==='drafted') return '<span class="pill pill-drafted">Drafted</span>';
+  if(st==='archive'||st==='archived') return '<span class="pill pill-archived">Archived</span>';
   return '<span class="pill pill-idea">Idea</span>';
 }
 function dPill(s){
@@ -525,7 +527,18 @@ function updateScore(){
   b.textContent=text;b.className='score-result '+cls;
 }
 
-window.toggleVideo=i=>{videos[i].scored=!videos[i].scored;renderVideos();};
+window.toggleVideo=async i=>{
+  const v=videos[i];
+  v.scored=!v.scored;
+  renderVideos();
+  try{
+    await fetch(PROXY+'/pages/'+v.id,{
+      method:'PATCH',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({properties:{'Week Score Point':{checkbox:v.scored}}})
+    });
+  }catch(e){console.warn('Could not sync tick to Notion:',e);}
+};
 window.toggleFit=i=>{fitState[i]=!fitState[i];localStorage.setItem('fitState',JSON.stringify(fitState));renderFitness();};
 window.saveFitLabel=(i,t)=>{
   const val=t.trim();
